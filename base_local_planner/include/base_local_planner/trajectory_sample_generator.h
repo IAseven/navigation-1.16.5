@@ -43,14 +43,14 @@
 namespace base_local_planner {
 
 /**
- * @class TrajectorySampleGenerator
+ * @class TrajectorySampleGenerator（轨迹生成器的接口）
  * @brief Provides an interface for navigation trajectory generators
  */
 class TrajectorySampleGenerator {
 public:
 
   /**
-   * Whether this generator can create more trajectories
+   * Whether this generator can create more trajectories（是否能生成更多轨迹）
    */
   virtual bool hasMoreTrajectories() = 0;
 
@@ -60,7 +60,7 @@ public:
   virtual bool nextTrajectory(Trajectory &traj) = 0;
 
   /**
-   * @brief  Virtual destructor for the interface
+   * @brief  Virtual destructor for the interface（析构函数）
    */
   virtual ~TrajectorySampleGenerator() {}
 

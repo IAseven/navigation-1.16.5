@@ -43,10 +43,17 @@
 namespace base_local_planner {
 
   /**
-   * We use the class to get even sized samples between min and max, inluding zero if it is not included (and range goes from negative to positive
+   * We use the class to get even sized samples between min and max, 
+   * inluding zero if it is not included (and range goes from negative to positive
+   * 用于获取最大/最小速度之间隔大小一样的速度样本集
    */
   class VelocityIterator {
     public:
+      /**
+       * @brief min 速度下限
+       * @brief max 速度上限
+       * @brief num_samples 速度采样个数
+       */
       VelocityIterator(double min, double max, int num_samples):
         current_index(0)
       {
@@ -55,17 +62,18 @@ namespace base_local_planner {
         } else {
           num_samples = std::max(2, num_samples);
 
-          // e.g. for 4 samples, split distance in 3 even parts
+          // e.g. for 4 samples, split distance in 3 even parts（计算分割的步长，按采样总数-1）
           double step_size = (max - min) / double(std::max(1, (num_samples - 1)));
 
           // we make sure to avoid rounding errors around min and max.
-          double current;
+          double current; //当前
           double next = min;
           for (int j = 0; j < num_samples - 1; ++j) {
             current = next;
             next += step_size;
             samples_.push_back(current);
             // if 0 is among samples, this is never true. Else it inserts a 0 between the positive and negative samples
+            // 当前的速度非常接近0时，我们就把他设为0
             if ((current < 0) && (next > 0)) {
               samples_.push_back(0.0);
             }

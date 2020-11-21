@@ -48,7 +48,7 @@
 
 namespace base_local_planner {
   /**
-   * @class VoxelGridModel
+   * @class VoxelGridModel（3D体素网格模型，用于轨迹的碰撞检测）
    * @brief A class that implements the WorldModel interface to provide grid
    * based collision checks for the trajectory controller using a 3D voxel grid.
    */
@@ -82,6 +82,7 @@ namespace base_local_planner {
        * @param  inscribed_radius The radius of the inscribed circle of the robot
        * @param  circumscribed_radius The radius of the circumscribed circle of the robot
        * @return Positive if all the points lie outside the footprint, negative otherwise
+       * 检查机器人的轮廓内是否有障碍物
        */
       virtual double footprintCost(const geometry_msgs::Point& position, const std::vector<geometry_msgs::Point>& footprint,
           double inscribed_radius, double circumscribed_radius);
@@ -122,6 +123,7 @@ namespace base_local_planner {
        */
       double pointCost(int x, int y);
 
+      // 删除扫描边界中的点
       void removePointsInScanBoundry(const PlanarLaserScan& laser_scan, double raytrace_range);
 
       inline bool worldToMap3D(double wx, double wy, double wz, unsigned int& mx, unsigned int& my, unsigned int& mz){
@@ -154,10 +156,12 @@ namespace base_local_planner {
         wy = origin_y_ + (my + 0.5) * xy_resolution_;
       }
 
+      // 计算3D空间中的点
       inline double dist(double x0, double y0, double z0, double x1, double y1, double z1){
         return sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0) + (z1 - z0) * (z1 - z0));
       }
 
+      // 向障碍层插入点
       inline void insert(const geometry_msgs::Point32& pt){
         unsigned int cell_x, cell_y, cell_z;
         if(!worldToMap3D(pt.x, pt.y, pt.z, cell_x, cell_y, cell_z))

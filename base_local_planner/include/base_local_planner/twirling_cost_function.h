@@ -48,6 +48,7 @@ namespace base_local_planner {
  * but with holonomic or near-holonomic robots, sometimes a robot spins
  * more than you'd like on its way to a goal. This class provides a way
  * to assign a penalty purely to rotational velocities.
+ * 用于控制机器人旋转来达到指定目标的成本函数
  */
 class TwirlingCostFunction: public base_local_planner::TrajectoryCostFunction {
 public:
@@ -55,6 +56,7 @@ public:
   TwirlingCostFunction() {}
   ~TwirlingCostFunction() {}
 
+  // 旋转轨迹得分
   double scoreTrajectory(Trajectory &traj);
 
   bool prepare() {return true;};

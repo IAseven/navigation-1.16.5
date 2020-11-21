@@ -46,8 +46,8 @@
 namespace base_local_planner {
   /**
    * @class WorldModel
-   * @brief An interface the trajectory controller uses to interact with the
-   * world regardless of the underlying world model.
+   * @brief An interface the trajectory controller uses to interact with the world regardless of the underlying world model.
+   *        轨迹控制器用来与世界模型交互的接口，而与基本的世界模型无关
    */
   class WorldModel{
     public:

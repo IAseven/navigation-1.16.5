@@ -73,12 +73,15 @@ public:
    * @param  y0 The y coordinate of the first point
    * @param  y1 The y coordinate of the second point
    * @param  pts Will be filled with the cells that lie on the line in the grid
+   *   在两个点之间跟踪一条线
    */
   void getLineCells(int x0, int x1, int y0, int y1, std::vector<base_local_planner::Position2DInt>& pts);
 
   /**
    * @brief Fill the outline of a polygon, in this case the robot footprint, in a grid
    * @param footprint The list of cells making up the footprint in the grid, will be modified to include all cells inside the footprint
+   * 
+   * 在网格中跟踪机器人的多边形
    */
   void getFillCells(std::vector<base_local_planner::Position2DInt>& footprint);
 };

@@ -60,7 +60,7 @@
 
 namespace base_local_planner {
   /**
-   * @class TrajectoryPlanner
+   * @class TrajectoryPlanner(轨迹生成器)
    * @brief Computes control velocities for a robot given a costmap, a plan, and the robot's position in the world. 
    */
   class TrajectoryPlanner{
@@ -318,7 +318,7 @@ namespace base_local_planner {
       boost::mutex configuration_mutex_;
 
       /**
-       * @brief  Compute x position based on velocity
+       * @brief  Compute x position based on velocity（基于x轴速度计算x轴位置）
        * @param  xi The current x position
        * @param  vx The current x velocity
        * @param  vy The current y velocity
@@ -331,7 +331,7 @@ namespace base_local_planner {
       }
 
       /**
-       * @brief  Compute y position based on velocity
+       * @brief  Compute y position based on velocity（基于y轴速度计算y轴位置）
        * @param  yi The current y position
        * @param  vx The current x velocity
        * @param  vy The current y velocity
@@ -344,7 +344,7 @@ namespace base_local_planner {
       }
 
       /**
-       * @brief  Compute orientation based on velocity
+       * @brief  Compute orientation based on velocity（基于角速度计算朝向）
        * @param  thetai The current orientation
        * @param  vth The current theta velocity
        * @param  dt The timestep to take
@@ -354,9 +354,8 @@ namespace base_local_planner {
         return thetai + vth * dt;
       }
 
-      //compute velocity based on acceleration
       /**
-       * @brief  Compute velocity based on acceleration
+       * @brief  Compute velocity based on acceleration（基于加速度计算速度上限）
        * @param vg The desired velocity, what we're accelerating up to 
        * @param vi The current velocity
        * @param a_max An acceleration limit
@@ -376,7 +375,9 @@ namespace base_local_planner {
         vth = acc_lim_theta_ * std::max(time, 0.0);
       }
 
+      // 计算线路成本
       double lineCost(int x0, int x1, int y0, int y1);
+      // 
       double pointCost(int x, int y);
       double headingDiff(int cell_x, int cell_y, double x, double y, double heading);
   };
