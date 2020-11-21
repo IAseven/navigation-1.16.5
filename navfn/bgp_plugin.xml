@@ -1,0 +1,8 @@
+<library path="lib/libnavfn">
+  <class name="navfn/NavfnROS" type="navfn::NavfnROS" base_class_type="nav_core::BaseGlobalPlanner">
+    <description>
+      A implementation of a grid based planner using Dijkstra
+      (使用Dijstra实现基于网格的计划程序)
+    </description>
+  </class>
+</library>
